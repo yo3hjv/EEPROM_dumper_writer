@@ -1,7 +1,7 @@
 /* --------------------------------------
 // I2C 24Cxx EEPROM R/W dumper
 // by Adrian YO3HJV
-// Key Features of ADI_DUMP_RW-v7               v_1.0 - release
+// Key Features of ADI_DUMP_RW-v7               v_1.1 - release
 ////EEPROM Operations
 Reads/writes 24Cxx EEPROM chips (24C01-24C512)
 Handles multiple EEPROM sizes (128B-65KB)
@@ -175,7 +175,7 @@ void setup() {
               digitalWrite(RED_LED_PIN, LOW);   // Start with red LED off
               digitalWrite(GREEN_LED_PIN, LOW); // Start with green LED off
               digitalWrite(BLUE_LED_PIN, LOW);  // Start with blue LED off
-
+              digitalWrite(YELLOW_LED_PIN, LOW);
               
               // Initialize dump switch with internal pullup
               pinMode(DUMP_SWITCH_PIN, INPUT_PULLUP);
@@ -187,10 +187,12 @@ void setup() {
               digitalWrite(RED_LED_PIN, HIGH);
               digitalWrite(YELLOW_LED_PIN, HIGH);
               digitalWrite(GREEN_LED_PIN, HIGH);
+              digitalWrite(BLUE_LED_PIN, HIGH);
               delay(500);  // Brief LED test
               digitalWrite(RED_LED_PIN, LOW);
               digitalWrite(YELLOW_LED_PIN, LOW);
               digitalWrite(GREEN_LED_PIN, LOW);
+              digitalWrite(BLUE_LED_PIN, HIGH);
               
               // Start Blue LED in slow flash mode
               blueLedFlashMode = BLUE_LED_SLOW_FLASH;
@@ -270,6 +272,7 @@ void setup() {
                 Serial.println(currentFileNumber);
                 
                 Serial.println(F("Enter 'd' to dump EEPROM or a 3-digit number to set file number"));
+                Serial.println(F("Enter 'c' followed by two digits to change EEPROM type (c01-c512)"));
               } else {
                 //Serial.println(F("System not fully ready - check warnings above"));
                 if (!sdCardReady) Serial.println(F("SD card issue detected"));
